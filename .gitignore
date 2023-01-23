@@ -1,0 +1,5 @@
+.DS_STORE
+node_modules
+otp/switzerland/graph.obj
+otp/switzerland/osm.pbf
+otp/switzerland/switzerland.gtfs.zip

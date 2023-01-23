@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+  integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+  crossorigin=""/>
+  <link rel="stylesheet" href="leaflet-routing-machine.css" />
+  <link rel="stylesheet" href="https://rawgit.com/aratcliffe/Leaflet.contextmenu/master/dist/leaflet.contextmenu.css" />
+
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+  integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+  crossorigin=""></script>
+  <style>
+    #map {             
+            width: 1000px;
+            height: 700px;}
+  </style>
+  <title>OSM Leaflet</title>
+</head>
+<body> 
+  <div id="search">
+    <form onsubmit="searchButtonClicked(event)">
+      <input name="search_input" id="search_input" type="text" placeholder="place, street, station etc">
+      <button type="submit" id="search_button">🔍</button>
+    </form>
+    <form onsubmit="searchForAmenities(event)">
+      <input name="search_amenities_input" id="search_amenities_input" type="text" placeholder="amenity">
+      <button type="submit" id="search_amenities_button">🔍</button>
+    </form>
+    <a onclick="clearAmenitiesLayers()">🗑️</a>
+  </div>
+  <div id="map"></div>
+  <div id="results"></div>
+  <script src="leaflet-routing-machine.js"></script>
+  <script src="https://rawgit.com/aratcliffe/Leaflet.contextmenu/master/dist/leaflet.contextmenu.js"></script>
+  
+  <script>
+    var ev;
+    var map = L.map('map', {
+      center: [47.2994, 8.5294],
+      noWrap: true,
+      zoom: 13,
+      contextmenu: true,
+      // contextmenuWidth: 140,
+      contextmenuItems: [
+        {
+          text: 'Peform reverse search',
+          callback: (event) => { performReverseSearch([event.latlng.lat, event.latlng.lng]) }
+        }
+      ]
+    }).setView([47.2994, 8.5294], 13);
+    L.tileLayer('http://160.85.253.69/hot/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      noWrap: true
+    }).addTo(map);
+
+//     L.Routing.control({
+//     waypoints: [
+//         L.latLng(47.3781008, 8.5393635),
+//         L.latLng(47.5009821, 8.7249793)
+//     ],
+//     routeWhileDragging: true
+// }).addTo(map);
+  </script>
+  <script src="index.js">
+  </script>
+</body>
+</html>
