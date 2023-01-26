@@ -6,15 +6,16 @@ const port = 80
 app.use(cors())
 
 app.get('/', (req, res) => {
+  console.log('request made')
   res.json({
     response:
       [
         {
-          text: 'something sbb can do',
+          text: 'SBB feature #1',
           apiEndpoint: 'http://api.sbb.ch/someEndpoint'
         },
         {
-          text: 'another thing sbb can do',
+          text: 'SBB feature #2',
           apiEndpoint: 'http://api.sbb.ch/oneMoreEndpoint'
         }
       ]
@@ -22,6 +23,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/someEndpoint', (req, res) => {
+  console.log('/someEndpoint hit')
   res.json({
     data:
       [
@@ -36,6 +38,7 @@ app.get('/someEndpoint', (req, res) => {
 })
 
 app.get('/oneMoreEndpoint', (req, res) => {
+    console.log('/oneMoreEndpoint hit')
   res.json({
     data:
       [

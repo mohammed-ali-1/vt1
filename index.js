@@ -133,6 +133,21 @@ async function getOperatorUrl(operator) {
 
 async function loadContextMenuItems(operator) {
   const url = await getOperatorUrl(operator)
+  console.log('fetching context menu items')
+  try {
+    const response = await fetch(url)
+    const responseJson = await response.json();
+    console.log(responseJson);
+    const cmItems = responseJson.response.map((contextMenuItem) => ({
+      text: contextMenuItem.text,
+      callback: async () => { fetch(contextMenuItem.apiEndpoint) }
+    }))
+    console.log('cmItems', cmItems)
+    return cmItems
+  } catch (fetchError) {
+    // alert('fetch failed. error in console');
+    console.error(fetchError);
+  }
 }
 
 function buildOverpassApiUrl(map, overpassQuery) {
